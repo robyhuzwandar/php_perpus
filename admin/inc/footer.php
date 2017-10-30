@@ -13,3 +13,7 @@
 <!-- ./wrapper -->
 </body>
 </html>
+
+   <script>
+    $(".input-group.date").datepicker({autoclose: true, todayHighlight: true});
+    </script>

@@ -39,8 +39,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 
 					<div class="form-group">
 						<label>Tgl Lahir</label>
-						<input type="text" class="form-control" name="tanggalLahir">
-
+						<div class="input-group date " data-date="" data-date-format="yyyy-mm-dd">
+						     <input class="form-control" type="text" name="tanggalLahir" readonly="readonly">
+						     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+						</div>
+					</div>
 					<div class="form-group">
 						<label>No HP</label>
 						<input type="text" class="form-control" name="nohp">

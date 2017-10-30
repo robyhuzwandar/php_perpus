@@ -21,6 +21,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.js"></script>
         <script src="../assets/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+        <script type="text/javascript" src="../assets/bootstrap/js/bootstrap-datepicker.js"></script>
         <script>
             $(document).ready(function(){
                 $('#tabel-data').DataTable();
@@ -40,3 +41,6 @@
                 );
             });
         </script>
+   <script>
+        $(".input-group.date").datepicker({autoclose: true, todayHighlight: true});
+    </script>

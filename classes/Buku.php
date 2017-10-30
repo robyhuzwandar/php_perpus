@@ -65,7 +65,7 @@ include_once ($filepath.'/../lib/Format.php');
 		    	echo "<span class='succes'>Hanya bisa Upload Gambar dengan type : -".implode(', ', $permited)."</span>";
 		    }else{
 		    	move_uploaded_file($file_temp, "../".$upload_image);
-		    	$query = "INSERT INTO buku(kodeBuku, judul, penulis, penerbit, tahunTerbit, gambar, kodeRak, kodeKolom, platform_kodeBuku, pemrograman_kodeBuku, stok) VALUES('$kodeBuku', '$judul', '$penulis', '$penerbit', '$thnterbit', '$upload_image', '$kodeRak', '$kodeKolom', '$platformkodeBuku', '$pkodeBuku', $stok)";
+		    	$query = "INSERT INTO buku(kodeBuku, judul, penulis, penerbit, tahunTerbit, gambar, kodeRak, kodeKolom, platform_id, pemrograman_id, stok) VALUES('$kodeBuku', '$judul', '$penulis', '$penerbit', '$thnterbit', '$upload_image', '$kodeRak', '$kodeKolom', '$platformkodeBuku', '$pkodeBuku', $stok)";
 				$insert_row = $this->db->insert($query);
 				if ($insert_row) {
 					$msg = "<span style='color:green;'> Buku Berhasil di simpan </span>";
@@ -117,8 +117,8 @@ include_once ($filepath.'/../lib/Format.php');
 			    	kodeRak = '$kodeRak',
 			    	kodeKolom = '$kodeKolom',
 			    	gambar = '$upload_image',
-			    	platform_kodeBuku = '$platformkodeBuku',
-			    	pemrograman_kodeBuku = '$pkodeBuku'
+			    	platform_id = '$platformkodeBuku',
+			    	pemrograman_id = '$pkodeBuku'
 			    	WHERE kodeBuku='$kodeBuku'";
 					$insert_row = $this->db->update($query);
 					if ($insert_row) {
@@ -139,8 +139,8 @@ include_once ($filepath.'/../lib/Format.php');
 			    	stok = '$stok',
 			    	kodeRak = '$kodeRak',
 			    	kodeKolom = '$kodeKolom',
-			    	platform_kodeBuku = '$platformkodeBuku',
-			    	pemrograman_kodeBuku = '$pkodeBuku'
+			    	platform_id = '$platformkodeBuku',
+			    	pemrograman_id = '$pkodeBuku'
 			    	WHERE kodeBuku='$kodeBuku'";
 					$insert_row = $this->db->update($query);
 					if ($insert_row) {
