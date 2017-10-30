@@ -52,26 +52,34 @@ class Transaksi
 	{	
 		$id = mysqli_real_escape_string($this->db->link, $id);
 		$staf = mysqli_real_escape_string($this->db->link, $staf);
-		$tgl1 = date('Y-m-d');
-		$tgl_kembali = date('Y-m-d', strtotime('+7 days', strtotime($tgl1)));
+		$tglpinjam = date('Y-m-d');
+		$batasPinjam = date('Y-m-d', strtotime('+7 days', strtotime($tglpinjam)));
 		
 		$query = "SELECT * FROM member WHERE id = '$id'";
 		$value = $this->db->select($query)->fetch_assoc();
 		$nim = $value['nim'];
 		$kodepinjam = substr($nim, 7);
-		$kodepinjam .= substr($tgl1, 4);
+		$kodepinjam .= substr($tglpinjam, 4);
+		preg_replace('/[^-a-zA-Z0-9_]/', '', $kodepinjam);
 
-		// $query = "SELECT * FROM pinjam WHERE member_id = '$nim'";
-		// $cekNim = $this->db->select($query);
-		// if ($cekNim) {
-		// 	$msg = "Nim masih dalam peminjaman";
-		// 	return $msg;
-		// }else{
-			$query = "INSERT INTO pinjam(kodepinjam, tglpinjam, member_id, admin_id, tglKembali) VALUES('$kodepinjam','$tgl1', '$id', '$staf', '$tgl_kembali')";
+		$gpass=NULL;
+		$n = 3; // jumlah karakter yang akan di bentuk.
+		$chr = '783736ABCDEFGHIJKLMNOPQRSTU454VWXYZabcdefghijklmnopqrstuvqxyz0123456789';
+		for($i=0;$i<$n;$i++){
+			$rIdx = rand(1,strlen($chr));
+			$gpass .=substr($chr,$rIdx,1);
+		}
+		$kodepinjam .= $gpass;
+
+		$query = "SELECT * FROM pinjam WHERE member_id = '$nim'";
+		$cekNim = $this->db->select($query);
+		if ($cekNim) {
+			$msg = "Nim masih dalam peminjaman";
+			return $msg;
+		}else{
+			$query = "INSERT INTO pinjam(kodepinjam, tglpinjam, member_id, admin_id, batasPinjam) VALUES('$kodepinjam','$tglpinjam', '$id', '$staf', '$batasPinjam ')";
 			$insert_row = $this->db->insert($query);
-
 			if ($insert_row) {
-
 			$query = "SELECT * FROM cart";
 			$getValue = $this->db->select($query);
 			if ($getValue) {
@@ -79,26 +87,15 @@ class Transaksi
 						$kodeBuku = $result['kodeBuku'];
 						$query = "INSERT INTO item(kodeBuku, kodepinjam) VALUES('$kodeBuku', '$kodepinjam')";
 						$insert_row = $this->db->insert($query);
-						if ($insert_row) {
-							$query = "DELETE * FROM cart";
-							$delCart = $this->db->delete($query);
-							if ($delCart) {
-								$msg = "<span style='color:green'>Buku Sukses Masuk ke daftar pinjam </span>";
-								return $msg;	
-							}
-						}else{
-							$msg = "<span style='color:red'>Buku Gagal Masuk ke daftar pinjam</span>";
-							return $msg;
-						}
 					}
 				}
-			// $msg = "<span style='green'>Buku Sukses Masuk ke daftar pinjam </span>";
-			// return $msg;
+				$msg = "<span style='green'>Buku Sukses Masuk ke daftar pinjam </span>";
+				return $msg;
 			}else{
 				$msg = "<span style='red'>Buku Gagal Masuk ke daftar pinjam</span>";
 				return $msg;
 			}
-		// }
+		}
 
 		
 		}
@@ -128,6 +125,12 @@ class Transaksi
 		$query = "SELECT * FROM pinjam";
 		$result = $this->db->select($query);
 		return $result;
+	}
+
+	public function delCart()
+	{
+		$query = "DELETE FROM cart";
+	    $delete_row = $this->db->delete($query);
 	}
 }
 

@@ -2,10 +2,10 @@
 <?php include '../inc/sidebar.php'; ?>
 <?php 
 
-	// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	// 	$kodeBuku = $_POST['buku'];
-	// 	$add_cart = $t->addToTemp($kodeBuku);
-	// }
+	if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
+		$kodeBuku = $_POST['buku'];
+		$add_cart = $t->addToTemp($kodeBuku);
+	}
 ?>
 <?php 
 	
@@ -13,9 +13,12 @@
 	if (isset($_POST['send'])) {
 		$id = $_POST['member'];
 		$add_pinjam = $t->addToPinjam($id, $staf);
+		if ($add_pinjam) {
+			$delcart = $t->delCart();
+		}
 	}
-	
 ?>
+
 <?php 
   if (isset($_GET['delBkb'])) {
     $kb = $_GET['delBkb'];
