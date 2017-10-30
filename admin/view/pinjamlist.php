@@ -1,3 +1,5 @@
+<?php include '../inc/header.php'; ?>
+<?php include '../inc/sidebar.php'; ?>
 <div class="panel panel-default">
 	<div class="panel-heading">
 		List Peminjaman
