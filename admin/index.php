@@ -287,6 +287,23 @@
           </ul>
         </li>
         <?php } ?>
+
+        <?php 
+            if (Session::get('level') == '0') {
+          ?>
+        <li class=" treeview menu-open">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Ketentuan</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          
+          <ul class="treeview-menu">
+            <li><a href="view/ketentuan.php"><i class="fa fa-circle-o"></i>Periksa Ketentuan</a></li>
+          </ul>
+        </li>
+        <?php } ?>
     </section>
        <!-- /.sidebar -->
   </aside>

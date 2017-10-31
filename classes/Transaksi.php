@@ -112,11 +112,10 @@ class Transaksi
 		$tglKembali = date('Y-m-d');
 
 
-
 		$start_date = new DateTime($batasPinjam);
 		$end_date = new DateTime($tglKembali);
 		$interval = $start_date->diff($end_date);
-		echo "$interval->days hari ";
+		$telat = $interval->days;
 		
 
 		$query = "INSERT INTO kembali(kodepinjam, tglKembali, telat, denda) VALUES('$kodepinjam','$tglKembali', '$telat', '$denda')";
@@ -184,6 +183,29 @@ class Transaksi
 	public function getKembaliByKodePinjam($kodepinjam)
 	{
 		$query = "SELECT * FROM kembali WHERE kodepinjam='$kodepinjam'";
+		$result = $this->db->select($query);
+		return $result;
+	}
+
+	public function ketentuanUpdate($denda, $jm_hari, $id)
+	{
+		$denda = mysqli_real_escape_string($this->db->link, $denda);
+		$jm_hari = mysqli_real_escape_string($this->db->link, $jm_hari);
+		$id = mysqli_real_escape_string($this->db->link, $id);
+
+		$query = "UPDATE ketentuan SET denda = '$denda', jm_hari = '$jm_hari' WHERE id='$id'";
+		$update_row = $this->db->update($query);
+		if ($update_row) {
+			$msg = "<span style='color:green;'>Platform Berhasil di Update</span>";
+	          return $msg;
+		}else{
+			$msg = "<span style='color:red;'>Platform gagal di Update!</span>";
+	          return $msg;
+		}
+	}
+	public function getKet()
+	{
+		$query = "SELECT * FROM ketentuan";
 		$result = $this->db->select($query);
 		return $result;
 	}

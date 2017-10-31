@@ -6,9 +6,6 @@
 		$id = $_GET['pinId'];
 	}
 
-	if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-		$Pengembalian = $t->updateBuku($_POST, $_FILES, $id);
-	}
 ?>
 
 <section class="content">
@@ -75,7 +72,6 @@
 				    	<td width="16%">
 
 				            <a href='#myModal' class='btn btn-primary btn-small' id='custId' data-toggle='modal' data-id="<?php echo  $result['kodepinjam']; ?>">Detail</a>
-                  
 
 				    		<a href="detailsKembali.php?pinId=<?php echo $result['kodepinjam']; ?>"><button type="submit" name="kembali" class="btn-success btn-sm">Pengembalian</button></a>
 				    	</td>

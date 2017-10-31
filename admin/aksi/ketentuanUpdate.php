@@ -1,14 +1,15 @@
 <?php include '../inc/header.php'; ?>
 <?php include '../inc/sidebar.php'; ?>
 <?php
-	if (!isset($_GET['pfId']) || $_GET['pfId'] == NULL) {
+	if (!isset($_GET['kId']) || $_GET['kId'] == NULL) {
 		echo "<script> window.location = '../view/platformlist.php';</script>";
 	}else{
-		$id = preg_replace('/[^-a-zA-Z0-9_]/', '', $_GET['pfId']);
+		$id = preg_replace('/[^-a-zA-Z0-9_]/', '', $_GET['kId']);
 	}
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') { //Menghasilkan metode yang dipakai untuk mengakses suatu halaman,EX:POST
-		$nama = $_POST['namaPf'];
-		$pfUpdate = $pf->platUpdate($nama, $id);
+		$denda = $_POST['denda'];
+		$jm_hari = $_POST['jm_hari'];
+		$pfUpdate = $t->ketentuanUpdate($denda, $jm_hari, $id);
 	}
 ?>
 
@@ -26,14 +27,18 @@
 					}
 					?>
 					<?php
-				      $pf = $pf->getPfById($id);
-				      if ($pf) {
-				        while ($result = $pf->fetch_assoc()) {
+				      $ket = $t->getKet();
+				      if ($ket) {
+				        while ($result = $ket->fetch_assoc()) {
 				    ?>
 					<form action="" method="post">
 						<div class="form-group">
-							<label>Platform</label>
-							<input type="text" value="<?php echo $result['nama']; ?>" class="form-control" name="namaPf">
+							<label>Denda</label>
+							<input type="text" value="<?php echo $result['denda']; ?>" class="form-control" name="denda">
+						</div>
+						<div class="form-group">
+							<label>Hari</label>
+							<input type="number" value="<?php echo $result['jm_hari']; ?>" class="form-control" name="jm_hari">
 						</div>
 						<input type="submit" class="btn btn-primary" name="submit" value="Simpan">
 					</form>

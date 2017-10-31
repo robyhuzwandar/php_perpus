@@ -39,7 +39,23 @@ class Platform
 			}
 		}
 			
+	}
+
+	public function platUpdate($nama, $id)
+	{
+		$nama = mysqli_real_escape_string($this->db->link, $nama);
+		$id = mysqli_real_escape_string($this->db->link, $id);
+
+		$query = "UPDATE platform SET nama = '$nama' WHERE id='$id'";
+		$update_row = $this->db->update($query);
+		if ($update_row) {
+			$msg = "<span style='color:green;'>Platform Berhasil di Update</span>";
+	          return $msg;
+		}else{
+			$msg = "<span style='color:red;'>Platform gagal di Update!</span>";
+	          return $msg;
 		}
+	}
 	
 	public function getAllPf()
   	{
