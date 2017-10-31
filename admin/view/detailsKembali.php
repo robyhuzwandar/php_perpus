@@ -1,10 +1,11 @@
 <?php include '../inc/header.php'; ?>
 <?php include '../inc/sidebar.php'; ?>
 <?php 
-	if (!isset($_GET['pinId']) || $_GET['pinId'] == NULL) {
+	if (!isset($_GET['kodepinjam']) || $_GET['kodepinjam'] == NULL) {
 		echo "<script>window.location='../view/pinjamlist.php'</script>";
 	}else{
-		$kodepinjam = preg_replace('/[^-a-zA-Z0-9_]/', '', $_GET['pinId']);
+		$kodepinjam = $_GET['kodepinjam']);
+		$insert_kem = $t->addToKembali($kodepinjam);
 	}
 ?>
 <section class="content">

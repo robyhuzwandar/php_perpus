@@ -1,13 +1,5 @@
 <?php include '../inc/header.php'; ?>
 <?php include '../inc/sidebar.php'; ?>
-<?php  
-	
-	if (isset($_POST['kembali'])) {
-		$id = $_GET['pinId'];
-	}
-
-?>
-
 <section class="content">
 <div class="panel panel-default">
 	<div class="panel-heading">
@@ -73,7 +65,7 @@
 
 				            <a href='#myModal' class='btn btn-primary btn-small' id='custId' data-toggle='modal' data-id="<?php echo  $result['kodepinjam']; ?>">Detail</a>
 
-				    		<a href="detailsKembali.php?pinId=<?php echo $result['kodepinjam']; ?>"><button type="submit" name="kembali" class="btn-success btn-sm">Pengembalian</button></a>
+				    		<a href="detailsKembali.php?kodepinjam=<?php echo $result['kodepinjam']; ?>"><button type="submit"  class="btn-success btn-sm">Pengembalian</button></a>
 				    	</td>
 			    	</tr>
 			        <?php } } ?>
