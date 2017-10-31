@@ -1,80 +1,91 @@
 <?php include '../inc/header.php'; ?>
 <?php include '../inc/sidebar.php'; ?>
-<?php 
-	if ($_SERVER['REQUEST_METHOD']=='POST') {
-		# code...
-	}
+<?php  
+	// if (!isset($_GET['pinId']) || $_GET['pinId'] == NULL) {
+	// 	echo "<script>window.location='detailsKembali.php'</script>";
+	// }else{
+	// 	$id = $_GET['pinId'];
+	// }
+
+	// if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
+	// 	$updateBuku = $b->updateBuku($_POST, $_FILES, $id);
+	// }
 ?>
+
+<section class="content">
 <div class="panel panel-default">
 	<div class="panel-heading">
 		List Peminjaman
 	</div>
 	<div class="panel-body">
-<form method="post" action="">
-	<table id="tabel-data" class="table table-striped table-bordered" width="100%" cellspacing="0">
-		<thead>
-	        <tr>
-	  	  		<th>No.</th>
-	  	  		<th>Kode Pinjam</th>
-	  	  		<th>Nama Peminjam</th>
-	  	  		<th>Tgl Pinjam</th>
-	  	  		<th>Batas Pinjam</th>
-	  	  		<th>Jumlah Pinjam</th>
-	  	  		<th>Staf</th>
-	  	  		<th>Status</th>
-	  	  		<th>Action</th>
-	    	</tr>
-	    </thead>
-        <tbody>
-	        <?php
-	        $i=0;
-	        $pinjam = $t->getPinjam();
-	        if ($pinjam) {
-	          while ($result = $pinjam->fetch_assoc()) {
-	            $i++;
-	          ?>
-	        <tr>
-    			<td><?php echo $i."."; ?></td>
-    			<td width="13%"><?php echo $result['kodepinjam'] ?></td>
-    			<td>
-    				<?php 
-    					$member = $m->getMById($result['member_id'])->fetch_assoc();
-    					echo $member['nama'];
-    				?>
-    			</td>
-    			<td><?php echo $result['tglpinjam']; ?></td>
-    			<td><?php echo $result['batasPinjam']; ?></td>
-    			<td>
-    				<?php 
-    					$jp = $t->JmPinjam($result['kodepinjam'])->fetch_row();
-    					echo $jp[0];
-    				?>
-    			</td>
-    			<td>
-    				<?php 
-    					$staf = $s->getStafById($result['admin_id'])->fetch_assoc();
-    					echo $staf['nama'];
-    				?>
-    			</td>
-    			<td>
-    				<?php 
-    					if ($result['status'] == '0') {
-    						echo "<b><span style='color:red'>Pinjam</span></b>";
-    					}else if ($result['status'] == '1') {
-    						echo "<span style:'color:green'>Kembali</span>";
-    					}
-    				?>
-    			</td>
-		    	<td width="16%">
-		            <button href='#myModal' class='btn btn-primary btn-sm' id='custId' data-toggle='modal' data-id="<?php echo $result['kodepinjam'] ?>" class="btn-danger btn-sm">Details</button>
-		    		<a href="detailsKembali.php?pinId=<?php echo $result['kodepinjam']; ?>"><button type="submit" name="kembali" class="btn-success btn-sm">Pengembalian</button></a>
-		    	</td>
-	    	</tr>
-	        <?php } } ?>
-      	</tbody>
-   </table>
-</form>
-	    <div class="modal fade" id="myModal" role="dialog">
+		<form method="post" action="">
+			<table id="tabel-data" class="table table-striped table-bordered" width="100%" cellspacing="0">
+				<thead>
+			        <tr>
+			  	  		<th>No.</th>
+			  	  		<th>Kode Pinjam</th>
+			  	  		<th>Nama Peminjam</th>
+			  	  		<th>Tgl Pinjam</th>
+			  	  		<th>Batas Pinjam</th>
+			  	  		<th>Jumlah Pinjam</th>
+			  	  		<th>Staf</th>
+			  	  		<th>Status</th>
+			  	  		<th>Action</th>
+			    	</tr>
+			    </thead>
+		        <tbody>
+			        <?php
+			        $i=0;
+			        $pinjam = $t->getPinjam();
+			        if ($pinjam) {
+			          while ($result = $pinjam->fetch_assoc()) {
+			            $i++;
+			          ?>
+			        <tr>
+		    			<td><?php echo $i."."; ?></td>
+		    			<td width="13%"><?php echo $result['kodepinjam'] ?></td>
+		    			<td>
+		    				<?php 
+		    					$member = $m->getMById($result['member_id'])->fetch_assoc();
+		    					echo $member['nama'];
+		    				?>
+		    			</td>
+		    			<td><?php echo $result['tglpinjam']; ?></td>
+		    			<td><?php echo $result['batasPinjam']; ?></td>
+		    			<td>
+		    				<?php 
+		    					$jp = $t->JmPinjam($result['kodepinjam'])->fetch_row();
+		    					echo $jp[0];
+		    				?>
+		    			</td>
+		    			<td>
+		    				<?php 
+		    					$staf = $s->getStafById($result['admin_id'])->fetch_assoc();
+		    					echo $staf['nama'];
+		    				?>
+		    			</td>
+		    			<td>
+		    				<?php 
+		    					if ($result['status'] == '0') {
+		    						echo "<b><span style='color:red'>Pinjam</span></b>";
+		    					}else if ($result['status'] == '1') {
+		    						echo "<span style:'color:green'>Kembali</span>";
+		    					}
+		    				?>
+		    			</td>
+				    	<td width="16%">
+
+				            <a href='#myModal' class='btn btn-primary btn-small' id='custId' data-toggle='modal' data-id="<?php $result['kodepinjam'] ?>">Detail</a>
+                  
+
+				    		<a href="detailsKembali.php?pinId=<?php echo $result['kodepinjam']; ?>"><button type="submit" name="kembali" class="btn-success btn-sm">Pengembalian</button></a>
+				    	</td>
+			    	</tr>
+			        <?php } } ?>
+		      	</tbody>
+		   </table>
+		</form>
+	     <div class="modal fade" id="myModal" role="dialog">
 	        <div class="modal-dialog" role="document">
 	            <div class="modal-content">
 	                <div class="modal-header">
@@ -84,15 +95,12 @@
 	                <div class="modal-body">
 	                    <div class="fetched-data"></div>
 	                </div>
-	                <div class="modal-footer">
-	                    <button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
-	                </div>
 	            </div>
 	        </div>
 	    </div>
 	</div>	
 </div>
-
+</section>
 
 
 

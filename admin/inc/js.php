@@ -13,7 +13,10 @@
                 $('#tabel-data').DataTable();
             });
         </script>
-        <script type="text/javascript">
+    <script>
+        $(".input-group.date").datepicker({autoclose: true, todayHighlight: true});
+    </script>
+    <script type="text/javascript">
     $(document).ready(function(){
         $('#myModal').on('show.bs.modal', function (e) {
             var rowid = $(e.relatedTarget).data('id');
@@ -29,6 +32,3 @@
          });
     });
   </script>
-   <script>
-        $(".input-group.date").datepicker({autoclose: true, todayHighlight: true});
-    </script>

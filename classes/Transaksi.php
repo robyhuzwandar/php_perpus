@@ -104,6 +104,8 @@ class Transaksi
 	{
 		$kodepinjam = mysqli_real_escape_string($this->db->link, $kodepinjam);
 		$tglKembali = date('Y-m-d');
+		
+		
 
 		$query = "INSERT INTO kembali(kodepinjam, tglKembali, telat, denda) VALUES('$kodepinjam','$tglKembali', '$telat', '$denda')";
 			$insert_row = $this->db->insert($query);
