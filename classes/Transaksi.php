@@ -103,8 +103,20 @@ class Transaksi
 	public function addToKembali($kodepinjam)
 	{
 		$kodepinjam = mysqli_real_escape_string($this->db->link, $kodepinjam);
+
+		$query = "SELECT * FROM pinjam WHERE kodepinjam='$kodepinjam'";
+		$getTgl = $this->db->select($query)->fetch_assoc();
+
+		$tglPinjam = $getTgl['tglpinjam'];
+		$batasPinjam = $getTgl['batasPinjam'];
 		$tglKembali = date('Y-m-d');
-		
+
+
+
+		$start_date = new DateTime($batasPinjam);
+		$end_date = new DateTime($tglKembali);
+		$interval = $start_date->diff($end_date);
+		echo "$interval->days hari ";
 		
 
 		$query = "INSERT INTO kembali(kodepinjam, tglKembali, telat, denda) VALUES('$kodepinjam','$tglKembali', '$telat', '$denda')";

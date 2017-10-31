@@ -2,11 +2,13 @@
 <?php include '../inc/sidebar.php'; ?>
 <?php  
 	
-	// $id = $_GET['pinId'];
+	if (isset($_POST['kembali'])) {
+		$id = $_GET['pinId'];
+	}
 
-	// if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-	// 	$updateBuku = $b->updateBuku($_POST, $_FILES, $id);
-	// }
+	if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
+		$Pengembalian = $t->updateBuku($_POST, $_FILES, $id);
+	}
 ?>
 
 <section class="content">
