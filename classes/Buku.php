@@ -46,8 +46,8 @@ include_once ($filepath.'/../lib/Format.php');
 	  		$stok = mysqli_real_escape_string($this->db->link, $data['stok']);
 	  		$kodeRak = mysqli_real_escape_string($this->db->link, $data['kodeRak']);
 	  		$kodeKolom = mysqli_real_escape_string($this->db->link, $data['kodeKolom']);
-	  		$pkodeBuku = mysqli_real_escape_string($this->db->link, $data['pkodeBuku']);
-	  		$platformkodeBuku = mysqli_real_escape_string($this->db->link, $data['platformkodeBuku']);
+	  		$pId = mysqli_real_escape_string($this->db->link, $data['pId']);
+	  		$platform_id = mysqli_real_escape_string($this->db->link, $data['platformId']);
 
 	  		$permited = array('jpg', 'jpeg', 'png', 'gif');
 		    $file_name = $_FILES['gambar']['name'];
@@ -65,7 +65,7 @@ include_once ($filepath.'/../lib/Format.php');
 		    	echo "<span class='succes'>Hanya bisa Upload Gambar dengan type : -".implode(', ', $permited)."</span>";
 		    }else{
 		    	move_uploaded_file($file_temp, "../".$upload_image);
-		    	$query = "INSERT INTO buku(kodeBuku, judul, penulis, penerbit, tahunTerbit, gambar, kodeRak, kodeKolom, platform_id, pemrograman_id, stok) VALUES('$kodeBuku', '$judul', '$penulis', '$penerbit', '$thnterbit', '$upload_image', '$kodeRak', '$kodeKolom', '$platformkodeBuku', '$pkodeBuku', $stok)";
+		    	$query = "INSERT INTO buku(kodeBuku, judul, penulis, penerbit, tahunTerbit, gambar, kodeRak, kodeKolom, platform_id, pemrograman_id, stok) VALUES('$kodeBuku', '$judul', '$penulis', '$penerbit', '$thnterbit', '$upload_image', '$kodeRak', '$kodeKolom', '$platform_id', '$pId', $stok)";
 				$insert_row = $this->db->insert($query);
 				if ($insert_row) {
 					$msg = "<span style='color:green;'> Buku Berhasil di simpan </span>";
@@ -173,9 +173,9 @@ include_once ($filepath.'/../lib/Format.php');
   		}
   	}
 
-  	public function getJmBuku()
+  	public function getJmBuku($kodepinjam)
   	{
-		$query = "SELECT COUNT(*) FROM buku";
+		$query = "SELECT COUNT(*) FROM buku WHERE kodepinjam='$kodepinjam'";
 		$return = $this->db->select($query);
 		return $return;
   	}

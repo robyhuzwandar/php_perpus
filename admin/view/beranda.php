@@ -12,7 +12,7 @@ $be = new Beranda();
           $b = new Buku();
           $jmB = $b->getJmBuku();
         ?>
-        <div class="panel panel-default"">
+        <div class="panel panel-default">
             <div class="panel-heading">
                 <center>Jumlah Buku</center>
             </div>
