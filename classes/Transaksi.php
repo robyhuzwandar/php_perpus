@@ -58,7 +58,7 @@ class Transaksi
 		$query = "SELECT * FROM member WHERE id = '$id'";
 		$value = $this->db->select($query)->fetch_assoc();
 		$nim = $value['nim'];
-		$kodepinjam = substr($nim, 7);
+		$kodepinjam = substr($nim, 8);
 		$kodepinjam .= substr($tglpinjam, 4);
 		$kodepinjam = preg_replace('/[^-a-zA-Z0-9_]/', '', $kodepinjam);
 
