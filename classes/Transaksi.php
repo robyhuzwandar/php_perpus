@@ -70,7 +70,6 @@ class Transaksi
 			$gpass .=substr($chr,$rIdx,1);
 		}
 		$kodepinjam .= $gpass;
-
 		$query = "SELECT * FROM pinjam WHERE member_id = '$nim'";
 		$cekNim = $this->db->select($query);
 		if ($cekNim) {
@@ -78,6 +77,7 @@ class Transaksi
 			return $msg;
 		}else{
 			$query = "INSERT INTO pinjam(kodepinjam, tglpinjam, member_id, admin_id, batasPinjam) VALUES('$kodepinjam','$tglpinjam', '$member_id', '$staf', '$batasPinjam ')";
+			$query = "INSERT INTO pinjam(kodepinjam, tglpinjam, member_id, admin_id, batasPinjam) VALUES('$kodepinjam','$tglpinjam', '$id', '$staf', '$batasPinjam ')";
 			$insert_row = $this->db->insert($query);
 			if ($insert_row) {
 			$query = "SELECT * FROM cart";
@@ -173,7 +173,6 @@ class Transaksi
 		$result = $this->db->select($query);
 		return $result;
 	}
-
 }
 
 ?>

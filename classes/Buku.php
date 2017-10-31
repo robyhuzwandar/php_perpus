@@ -173,9 +173,9 @@ include_once ($filepath.'/../lib/Format.php');
   		}
   	}
 
-  	public function getJmBuku($kodepinjam)
+  	public function getJmBuku()
   	{
-		$query = "SELECT COUNT(*) FROM buku WHERE kodepinjam='$kodepinjam'";
+		$query = "SELECT COUNT(*) FROM buku";
 		$return = $this->db->select($query);
 		return $return;
   	}
