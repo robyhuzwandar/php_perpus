@@ -64,12 +64,11 @@ include '../../classes/Staf.php';
           <li class="notifications-menu">
             <a href="#" >
               <i class="fa fa-bell-o"></i>
+
+              <?php 
+                
+              ?>
               <span class="label label-warning">10</span>
-            </a>
-          </li>
-          <li class="dropdown notifications-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              Pinjam
             </a>
           </li>
           <!-- User Account: style can be found in dropdown.less -->

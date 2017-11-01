@@ -77,7 +77,7 @@ include_once ($filepath.'/../lib/Format.php');
 		    }
 	  	}
 
-	  	public function updateBuku($data, $file, $kodeBuku)
+	  	public function updateBuku($data, $file)
 	  	{
 	  		$kodeBuku = mysqli_real_escape_string($this->db->link, $data['kodeBuku']);
 	  		$judul = mysqli_real_escape_string($this->db->link, $data['judul']);
@@ -87,8 +87,8 @@ include_once ($filepath.'/../lib/Format.php');
 	  		$stok = mysqli_real_escape_string($this->db->link, $data['stok']);
 	  		$kodeRak = mysqli_real_escape_string($this->db->link, $data['kodeRak']);
 	  		$kodeKolom = mysqli_real_escape_string($this->db->link, $data['kodeKolom']);
-	  		$pkodeBuku = mysqli_real_escape_string($this->db->link, $data['pkodeBuku']);
-	  		$platformkodeBuku = mysqli_real_escape_string($this->db->link, $data['platformkodeBuku']);
+	  		$pId = mysqli_real_escape_string($this->db->link, $data['pId']);
+	  		$platformId = mysqli_real_escape_string($this->db->link, $data['platformId']);
 
 	  		$permited = array('jpg', 'jpeg', 'png', 'gif');
 		    $file_name = $_FILES['gambar']['name'];
@@ -117,8 +117,8 @@ include_once ($filepath.'/../lib/Format.php');
 			    	kodeRak = '$kodeRak',
 			    	kodeKolom = '$kodeKolom',
 			    	gambar = '$upload_image',
-			    	platform_id = '$platformkodeBuku',
-			    	pemrograman_id = '$pkodeBuku'
+			    	platform_id = '$platformId',
+			    	pemrograman_id = '$pId'
 			    	WHERE kodeBuku='$kodeBuku'";
 					$insert_row = $this->db->update($query);
 					if ($insert_row) {
@@ -139,8 +139,8 @@ include_once ($filepath.'/../lib/Format.php');
 			    	stok = '$stok',
 			    	kodeRak = '$kodeRak',
 			    	kodeKolom = '$kodeKolom',
-			    	platform_id = '$platformkodeBuku',
-			    	pemrograman_id = '$pkodeBuku'
+			    	platform_id = '$platformId',
+			    	pemrograman_id = '$pId'
 			    	WHERE kodeBuku='$kodeBuku'";
 					$insert_row = $this->db->update($query);
 					if ($insert_row) {

@@ -5,11 +5,11 @@
 	if (!isset($_GET['bId']) || $_GET['bId'] == NULL) {
 		echo "<script>window.location='../view/bukulist.php'</script>";
 	}else{
-		$id = preg_replace('/[^-a-zA-Z0-9_]/', '', $_GET['bId']);
+		$kodeBuku = preg_replace('/[^-a-zA-Z0-9_]/', '', $_GET['bId']);
 	}
 
 	if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-		$updateBuku = $b->updateBuku($_POST, $_FILES, $id);
+		$updateBuku = $b->updateBuku($_POST, $_FILES, $kodeBuku);
 	}
 ?>
 <section class="content">
@@ -26,11 +26,16 @@
 					}
 				?>
 				<?php 
-					$updateBuku = $b->getBukuById($id);
+					$updateBuku = $b->getBukuBykodeBuku($kodeBuku);
 					if ($updateBuku) {
 					while ($result = $updateBuku->fetch_assoc()) {
 				?>
 				<form action="" method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<label>Kode Buku</label>
+						<input type="text" value="<?php echo $result['kodeBuku']; ?>" class="form-control" name="kodeBuku">
+					</div>
+
 					<div class="form-group">
 						<label>Judul Buku</label>
 						<input type="text" value="<?php echo $result['judul']; ?>" class="form-control" name="judul">

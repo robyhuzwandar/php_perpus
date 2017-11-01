@@ -46,8 +46,8 @@
     			<td><?php echo $result['tahunTerbit']; ?></td>
           <td width="16%"><img width="35%" src="../<?php echo $result['gambar'] ?>"></td>
     			<td width="16%">
-    				<a href="../aksi/bukuUpdate.php?bId=<?php echo $result['id']; ?>"><button class="btn-primary btn-sm">Edit</button></a>
-            <a onclick="return confirm('Yakin untuk Hapus Data ?')" href="bukulist.php?delBid=<?php echo $result['id']; ?>"><button class="btn-danger btn-sm">Hapus</button></a>
+    				<a href="../aksi/bukuUpdate.php?bId=<?php echo $result['kodeBuku']; ?>" class="btn-primary btn-sm">Edit</a>
+            <a onclick="return confirm('Yakin untuk Hapus Data ?')" href="bukulist.php?delBid=<?php echo $result['kodeBuku']; ?>" class="btn-danger btn-sm">Hapus</a>
     			</td>
     		</tr>
         <?php } } ?>

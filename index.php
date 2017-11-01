@@ -37,7 +37,7 @@
         <?php } } ?>
     </div>
 
-    <div class="card">
+<!--     <div class="card">
       <h5 style="padding: 10px; background: lavender; !importan">Baru di Pinjam</h5>
     </div>
     <div class="row">
@@ -61,6 +61,6 @@
             </div>
         </div>
         <?php } } ?>
-    </div>
+    </div> -->
  <?php include 'inc/footer.php'; ?>
 

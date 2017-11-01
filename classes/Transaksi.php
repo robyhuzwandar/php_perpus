@@ -193,7 +193,7 @@ class Transaksi
 		}
 	}
 
-	public function getAllMember()
+	public function getAllPinjam()
 	{
 		$query = "SELECT * FROM pinjam";
 		$result = $this->db->select($query);
@@ -215,7 +215,7 @@ class Transaksi
 
 	public function getPinjam()
 	{
-		$query = "SELECT * FROM pinjam";
+		$query = "SELECT * FROM pinjam ORDER BY tglPinjam DESC";
 		$result = $this->db->select($query);
 		return $result;
 	}
