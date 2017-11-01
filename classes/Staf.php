@@ -66,8 +66,8 @@
 	  	{
 	  		$nama = mysqli_real_escape_string($this->db->link, $data['nama']);
 	  		$email = mysqli_real_escape_string($this->db->link, $data['email']);
-	  		$username = mysqli_real_escape_string($this->db->link, $data['username']);
-	  		$password = mysqli_real_escape_string($this->db->link, $data['password']);
+	  		$username = mysqli_real_escape_string($this->db->link, $data['user']);
+	  		$level = mysqli_real_escape_string($this->db->link, $data['level']);
 
 	  		$permited = array('jpg', 'jpeg', 'png', 'gif');
 		    $file_name = $_FILES['foto']['name'];
@@ -92,12 +92,12 @@
 				    	echo "<span class='succes'>Hanya bisa Upload Foto dengan type : -".implode(', ', $permited)."</span>";
 				    }else{
 			    		move_uploaded_file($file_temp, "../".$upload_image);
-				    	$query = "UPDATE member SET
+				    	$query = "UPDATE staf SET
 				    	nama = '$nama',
 				    	email = '$email', 
 				    	user = '$username',
-				    	pass = '$password',
-				    	foto = '$upload_image'
+				    	foto = '$upload_image',
+				    	level = '$level'
 				    	WHERE id = '$id'";
 						$insert_row = $this->db->update($query);
 						if ($insert_row) {
@@ -109,11 +109,11 @@
 						}
 				    }
 			    }else{
-		    		$query = "UPDATE member SET
+		    		$query = "UPDATE staf SET
 			    	nama = '$nama', 
 			    	email = '$email', 
 			    	user = '$username',
-			    	pass = '$password'
+			    	level = '$level'
 			    	WHERE id = '$id'";
 					$insert_row = $this->db->update($query);
 					if ($insert_row) {
