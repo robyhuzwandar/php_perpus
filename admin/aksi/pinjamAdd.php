@@ -1,19 +1,18 @@
 <?php include '../inc/header.php'; ?>
 <?php include '../inc/sidebar.php'; ?>
-<?php 
 
-	if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
+<?php 
+	if (isset($_POST['add'])) {
 		$kodeBuku = $_POST['buku'];
 		$add_cart = $t->addToTemp($kodeBuku);
 	}
 ?>
-<?php 
-	
+<?php 	
 	$staf = Session::get('id');
 	if (isset($_POST['send'])) {
 		$id = $_POST['member'];
 		$add_pinjam = $t->addToPinjam($id, $staf);
-		if ($add_pinjam) {
+		if (isset($add_pinjam)) {
 			$delcart = $t->delCart();
 		}
 	}
@@ -49,7 +48,7 @@
 					    </select>
 					</div>
 						<div class="form-group"><br>
-						<input type="submit" id='insert' class="btn btn-primary simpan" name="add" value="Add" style="margin-top: 5px;">
+						<input type="submit" class="btn btn-primary simpan" name="add" value="Add" style="margin-top: 5px;">
 						</div>
 					</div>
 				</div>
@@ -78,10 +77,9 @@
 						<tr>
 						<td><?php echo $no; ?></td>
 						<td><?php
-							// $kodeBuku = $result['kodeBuku'];	
-							// $value = $b->getBukuBykodeBuku($kodeBuku)->fetch_assoc();
-							// echo $value['judul'];
-						echo $result['kodeBuku'];
+							$kodeBuku = $result['kodeBuku'];	
+							$value = $b->getBukuBykodeBuku($kodeBuku)->fetch_assoc();
+							echo $value['judul'];
 						?></td>
 						<td width="16%">
 				            <a onclick="return confirm('Yakin untuk Hapus Data ?')" href="pinjamAdd.php?delBkb=<?php echo $result['kodeBuku']; ?>"><button class="btn-danger btn-sm">Hapus</button></a>
@@ -106,6 +104,11 @@
 							        <?php } } ?>
 							    </select>
 							</div>
+							<?php 
+						    	if (isset($add_pinjam)) {
+						    		echo $add_pinjam;
+						    	}
+						    ?>
 								<div class="form-group"><br>
 								<input type="submit" id='insert' class="btn btn-primary simpan" name="send" value="Kirim Ke Peminjaman" style="margin-top: 5px;">
 								</div>

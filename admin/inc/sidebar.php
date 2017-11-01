@@ -45,8 +45,7 @@
           <ul class=" treeview-menu">
             <li><a href="../aksi/pinjamAdd.php"><i class="fa fa-circle-o"></i>Tambah Peminjam</a></li>
             <li><a href="../view/pinjamlist.php"><i class="fa fa-circle-o"></i>List Peminjaman</a></li>
-            <li><a href="../iew/telat.php"><i class="fa fa-circle-o"></i>Telat</a></li>
-            <li><a href="../aksi/pengembalian.php"><i class="fa fa-circle-o"></i>Pengembalian</a></li>
+            <li><a href="../view/pengembalian.php"><i class="fa fa-circle-o"></i>Pengembalian</a></li>
           </ul>
         </li>
 

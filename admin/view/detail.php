@@ -22,7 +22,6 @@ spl_autoload_register(function($class){
 	</thead>
 	</tr>
 	<tr>
-		<tbody>
 		<?php 
     		$no=0;
 			$getItem = $t->getItem($kodepinjam);
@@ -30,6 +29,7 @@ spl_autoload_register(function($class){
 				while ($result = $getItem->fetch_assoc()) {
 					$no++;
 		?>
+		<tbody>
 			<td><?php echo $no.'.'; ?></td>
 			<td><?php
 				$getBuku = $b->getBukuBykodeBuku($result['kodeBuku'])->fetch_assoc();
@@ -45,8 +45,8 @@ spl_autoload_register(function($class){
 				$getBuku = $b->getBukuBykodeBuku($result['kodeBuku'])->fetch_assoc();
 				echo $getBuku['tahunTerbit'];
 			?></td>
-			<?php } }  ?>
 		</tbody>
+			<?php } }  ?>
 	</tr>
 
 </table>

@@ -50,7 +50,7 @@ class Transaksi
 
 	public function addToPinjam($id, $staf)
 	{	
-		$member_id = mysqli_real_escape_string($this->db->link, $id);
+		$id = mysqli_real_escape_string($this->db->link, $id);
 		$staf = mysqli_real_escape_string($this->db->link, $staf);
 		$tglpinjam = date('Y-m-d');
 		$batasPinjam = date('Y-m-d', strtotime('+7 days', strtotime($tglpinjam)));
@@ -70,10 +70,10 @@ class Transaksi
 			$gpass .=substr($chr,$rIdx,1);
 		}
 		$kodepinjam .= $gpass;
-		$query = "SELECT * FROM pinjam WHERE member_id = '$nim'";
+		$query = "SELECT * FROM pinjam WHERE member_id = '$id' AND status='0'";
 		$cekNim = $this->db->select($query);
 		if ($cekNim) {
-			$msg = "Nim masih dalam peminjaman";
+			$msg = "<span style='color:red'>Nim masih dalam peminjaman</span>";
 			return $msg;
 		}else{
 			$query = "INSERT INTO pinjam(kodepinjam, tglpinjam, member_id, admin_id, batasPinjam) VALUES('$kodepinjam','$tglpinjam', '$member_id', '$staf', '$batasPinjam ')";
@@ -89,10 +89,10 @@ class Transaksi
 						$insert_row = $this->db->insert($query);
 					}
 				}
-				$msg = "<span style='green'>Buku Sukses Masuk ke daftar pinjam </span>";
+				$msg = "<span style='color:green'>Buku Sukses Masuk ke daftar pinjam </span>";
 				return $msg;
 			}else{
-				$msg = "<span style='red'>Buku Gagal Masuk ke daftar pinjam</span>";
+				$msg = "<span style='color:red'>Buku Gagal Masuk ke daftar pinjam</span>";
 				return $msg;
 			}
 		}
@@ -138,8 +138,6 @@ class Transaksi
 			$interval = $start_date->diff($end_date);
 			$telat = $interval->days;
 			$denda = $telat * $ud;
-			echo $telat.'<br>';
-			echo $denda;
 		}
 	  //meminjam namun ngembalikan pada tahun berikutnya
 		else if ($y_batas < $y_kembali and $y_pinjam == $y_batas){
@@ -148,8 +146,6 @@ class Transaksi
 			$interval = $start_date->diff($end_date);
 			$telat = $interval->days;
 			$denda = $telat * $ud;
-			echo $telat.'<br>';
-			echo $denda;
 		}
 	  //jika dia meminjam pd bln yg sama, batasnya pada bulan yg sama, mengembalikan pd bulan berikutnya dan tahun yg sama
 		else if ($m_pinjam == $m_batas and $m_batas < $m_kembali and $y_pinjam == $y_kembali){
@@ -158,8 +154,6 @@ class Transaksi
 			$interval = $start_date->diff($end_date);
 			$telat = $interval->days;
 			$denda = $telat * $ud;
-			echo $telat.'<br>';
-			echo $denda;
 		}
 	  //jika dia meminjam pada akhir bulan batasnya pada bulan yg sama namun dia mengembalikan pada awal bulan tahun berikutnya
 		else if ($m_pinjam == $m_batas and $m_batas > $m_kembali and $y_batas < $y_kembali){
@@ -281,7 +275,16 @@ class Transaksi
 		$query = "SELECT * FROM ketentuan";
 		$result = $this->db->select($query);
 		return $result;
+	}	
+
+	public function getPinjamBystatus()
+	{
+		$query = "SELECT * FROM pinjam WHERE status ='1'";
+		$result = $this->db->select($query);
+		return $result;
 	}
+	
 }
+
 
 ?>

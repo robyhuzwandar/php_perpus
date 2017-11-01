@@ -16,7 +16,10 @@
 			  	  		<th>Nama Peminjam</th>
 			  	  		<th>Tgl Pinjam</th>
 			  	  		<th>Batas Pinjam</th>
-			  	  		<th>Jumlah Pinjam</th>
+			  	  		<th width="5%">Jumlah Pinjam</th>
+			  	  		<th>Tanggal Kembali</th>
+			  	  		<th>Telat</th>
+			  	  		<th>Denda</th>
 			  	  		<th>Staf</th>
 			  	  		<th>Status</th>
 			  	  		<th>Action</th>
@@ -25,7 +28,7 @@
 		        <tbody>
 			        <?php
 			        $i=0;
-			        $pinjam = $t->getPinjam();
+			        $pinjam = $t->getPinjamBystatus();
 			        if ($pinjam) {
 			          while ($result = $pinjam->fetch_assoc()) {
 			            $i++;
@@ -45,6 +48,24 @@
 		    				<?php 
 		    					$jp = $t->JmPinjam($result['kodepinjam'])->fetch_row();
 		    					echo $jp[0];
+		    				?>
+		    			</td>
+		    			<td>
+		    				<?php 
+		    					$telat = $t->getKembaliByKodePinjam($result['kodepinjam'])->fetch_assoc();
+		    					echo $telat['tglKembali'];
+		    				?>
+		    			</td>
+		    			<td>
+		    				<?php 
+		    					$telat = $t->getKembaliByKodePinjam($result['kodepinjam'])->fetch_assoc();
+		    					echo $telat['telat'].' Hari';
+		    				?>
+		    			</td>
+		    			<td>
+		    				<?php 
+		    					$telat = $t->getKembaliByKodePinjam($result['kodepinjam'])->fetch_assoc();
+		    					echo 'Rp. '.$telat['denda'];
 		    				?>
 		    			</td>
 		    			<td>
